@@ -26,50 +26,27 @@ def isAndroid() -> bool:
 
 def installTor():
     if shutil.which('tor'):
-        if isAndroid == False:
-            os.system('sudo service tor start')
-        if isAndroid == True:
-            os.system('tor')
+        os.system('sudo service tor start')
         pass
     else:
-        if isAndroid() == False:
-            os.system('clear')
-            print("Oh I'm so sorry you don't have Tor !")
-            time.sleep(1)
-            print("But don't worry Skiplier will install Tor and setup it")
-            time.sleep(2)
-            print('\tInstalling a Tor...')
-            os.system('sudo apt-get install tor')
-            print('Tor is installed')
-            time.sleep(2)
-            print('Everything is being prepared...')
-            time.sleep(3)
-            res = requests.get('https://raw.githubusercontent.com/Enmn/Skiplier/main/src/proxychains4.txt')
-            with open('/etc/proxychains4.conf', 'wb') as f:
-                for data in res.iter_content(chunk_size=8192):
-                    f.write(data)
-            print('Everything has been successfully completed, you can now run Skiplier again')
-            os.system('sudo service tor start')
-            pass
-        if isAndroid() == True:
-            os.system('clear')
-            print("Oh I'm so sorry you don't have Tor !")
-            time.sleep(1)
-            print("But don't worry Skiplier will install Tor and setup it")
-            time.sleep(2)
-            print('\tInstalling a Tor...')
-            os.system('pkg install tor')
-            print('Tor is installed')
-            time.sleep(2)
-            print('Everything is being prepared...')
-            time.sleep(3)
-            res = requests.get('https://raw.githubusercontent.com/Enmn/Skiplier/main/src/proxychains4.txt')
-            with open('/etc/proxychains4.conf', 'wb') as f:
-                for data in res.iter_content(chunk_size=8192):
-                    f.write(data)
-            print('Everything has been successfully completed, you can now run Skiplier again')
-            os.system('tor')
-            pass
+        os.system('clear')
+        print("Oh I'm so sorry you don't have Tor !")
+        time.sleep(1)
+        print("But don't worry Skiplier will install Tor and setup it")
+        time.sleep(2)
+        print('\tInstalling a Tor...')
+        os.system('sudo apt-get install tor')
+        print('Tor is installed')
+        time.sleep(2)
+        print('Everything is being prepared...')
+        time.sleep(3)
+        res = requests.get('https://raw.githubusercontent.com/Enmn/Skiplier/main/src/proxychains4.txt')
+        with open('/etc/proxychains4.conf', 'wb') as f:
+            for data in res.iter_content(chunk_size=8192):
+                f.write(data)
+        print('Everything has been successfully completed, you can now run Skiplier again')
+        os.system('sudo service tor start')
+        pass
 installTor()
 
 
