@@ -17,7 +17,6 @@ After that, save the file, and you will be done with the Tor server
 
 ## Installation
 ```console
-# Here, type this command to install
 $ git clone https://github.com/Enmn/Skiplier
 
 # Here you will enter the Skiplier folder
