@@ -34,4 +34,4 @@ $ python3 skiplier.py
 ## License
 The source code for the site is licensed under the MIT license<br/>
 Find a file called 'LICENSE'<br/>
-Developr - [Emnm](https://github.com/Enmn)
+Developr - [Enmn](https://github.com/Enmn)
