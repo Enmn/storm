@@ -4,7 +4,6 @@ import os
 import shutil
 import re
 from urllib.parse import unquote
-import platform
 from base64 import b64decode
 try:
     import requests
@@ -12,15 +11,6 @@ try:
 except ImportError:
     os.system('pip3 install requests')
     os.system('pip3 install bs4')
-
-
-
-def isAndroid() -> bool: 
-    for item in list(os.environ.keys()): 
-        if "ANDROID" in item.upper(): 
-            return True
-        else:
-            return False 
 
 
 
@@ -70,16 +60,16 @@ def headers():
     randuser = random.choice(useragent_list)
     return randuser
 
-
+useragent = headers()
 
 def get_tor_session():
-    session = requests.session()
+    session = requests.Session()
     session.proxies = {'http':  'socks5://127.0.0.1:9050', 'https': 'socks5://127.0.0.1:9050'}
+    session.headers = {'user-agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.74 Safari/537.36'}
     return session
 
 
 
-useragent = headers()
 os.system("clear")
 session = get_tor_session()
 
@@ -145,6 +135,24 @@ if domain == 'cutt.us' or domain == 'soo.gd':
     os.system('sudo service tor stop')
     print(reset + '\n' + uri)
     exit()
+
+
+
+if domain == 'tiny.cc':
+    protocol = url.split(':')[-0]
+    if protocol == 'http':
+        link = url.split(':')[1]
+        url = protocol + 's' + ':' + link
+    elif protocol == 'https':
+        url = url
+    elif protocol != 'http' or protocol != 'https':
+        url = 'https://' + url
+    response = session.head(url, headers={'user-agent': useragent})
+    if response.headers['Location']:
+        uri = response.headers['Location']
+        os.system('sudo service tor stop')
+        print(reset + '\n' + uri)
+        exit()
 
 
 
