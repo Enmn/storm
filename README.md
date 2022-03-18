@@ -31,6 +31,9 @@ $ python3 skiplier.py
 ## Screenshot
 <img src="https://i.imgur.com/sVg3ukF.png" alt="screenshot" width="650" height="500">
 
+# Note
+You must know that it is possible that the site does not work and the reason is not from the tool, but rather from the Tor proxy, and I do not know what the problem is in the first place, but fortunately there are sites that you can access without any problems
+
 ## License
 The source code for the site is licensed under the MIT license<br/>
 Find a file called 'LICENSE'<br/>
