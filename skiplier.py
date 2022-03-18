@@ -2,6 +2,8 @@ import random
 import time
 import os
 import shutil
+import json
+import socket
 import re
 from urllib.parse import unquote
 from base64 import b64decode
@@ -41,6 +43,12 @@ installTor()
 
 
 
+def output_file(i):
+    with open('output_extras.json', 'w') as file:
+        file.write(i)
+
+
+
 def headers():
     useragent_list = [
         "Mozilla/5.0 (Windows NT 5.1; rv:41.0) Gecko/20100101"\
@@ -55,17 +63,19 @@ def headers():
         "Edge/12.246"\
         "Mozilla/5.0 (X11; Ubuntu; Linux i686; rv:15.0) Gecko/20100101 Firefox/15.0.1"\
         "Opera/9.80 (X11; Linux i686; U; ru) Presto/2.8.131 Version/11.11"\
-        "Mozilla/5.0 (iPhone; CPU iPhone OS 15_3_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.3 Mobile/15E148 Safari/604.1"
+        "Mozilla/5.0 (iPhone; CPU iPhone OS 15_3_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.3 Mobile/15E148 Safari/604.1",
+        "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.83 Safari/537.36"
         ]
     randuser = random.choice(useragent_list)
     return randuser
 
-useragent = headers()
+
 
 def get_tor_session():
+    useragent = headers()
     session = requests.Session()
     session.proxies = {'http':  'socks5://127.0.0.1:9050', 'https': 'socks5://127.0.0.1:9050'}
-    session.headers = {'user-agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.74 Safari/537.36'}
+    session.headers = {'user-agent': useragent}
     return session
 
 
@@ -73,12 +83,98 @@ def get_tor_session():
 os.system("clear")
 session = get_tor_session()
 
+
+
+def DecodeURL(url):
+    global json_data
+    info = session.get(url)
+    hostname = url.split("//")[-1].split("/")[0].split('?')[0]
+    ip = socket.gethostbyname(hostname)
+    dev_info = json.loads(session.get('https://ipinfo.io/' + ip + '/json').text)
+    data = {}
+    # title
+    soup = BeautifulSoup(info.text, "lxml")
+    data['Title'] = soup.title.string
+    # destination
+    data['Destination'] = url
+    # domain
+    data['Domain'] = hostname
+    # status
+    data['Status'] = str(info.status_code) + ' ' + str(info.reason)
+    # onlone
+    data['Online'] = str(info.ok).lower()
+    # ip
+    ip = socket.gethostbyname(hostname)
+    data['IP'] = ip
+    # dev
+    try:
+        data['City'] = dev_info['city']
+        data['Region'] = dev_info['region']
+        data['Country'] = dev_info['country']
+        data['Loc'] = dev_info['loc']
+        data['Org'] = dev_info['org']
+        data['Postal'] = dev_info['postal']
+        data['Timezone'] = dev_info['timezone']
+        data['Filesave'] = 'true'
+    except KeyError:
+        pass
+    json_data = json.dumps(data)
+    return json_data
+
+
+
+def EncodeURL(url):
+    global json_datae
+    hostname = url.split("//")[-1].split("/")[0].split('?')[0]
+    if hostname == 'favoacew.com' or domain == 'fumacrom.com' or domain == 'barsoocm.com':
+        hostname = 'adf.ly'
+    info = session.get('https://' + hostname)
+    ip = socket.gethostbyname(hostname)
+    dev_info = json.loads(session.get('https://ipinfo.io/' + ip + '/json').text)
+    data = {}
+    data['Website'] = 'https://' + hostname
+    # domain
+    data['Domain'] = hostname
+    # status
+    data['Status'] = str(info.status_code) + ' ' + str(info.reason)
+    # onlone
+    data['Online'] = str(info.ok).lower()
+    # ip
+    ip = socket.gethostbyname(hostname)
+    data['IP'] = ip
+    # dev
+    try:
+        data['City'] = dev_info['city']
+        data['Region'] = dev_info['region']
+        data['Country'] = dev_info['country']
+        data['Loc'] = dev_info['loc']
+        data['Org'] = dev_info['org']
+        data['Postal'] = dev_info['postal']
+        data['Timezone'] = dev_info['timezone']
+        data['Filesave'] = 'false'
+    except KeyError:
+        pass
+    json_datae = json.dumps(data)
+    return json_datae
+
+
+
+def for_loop():
+    print(boldblue + f"[ {reset + '*' + boldblue} ] {cyan + 'Here You Will See the Information of the Site That Was Decoded'}")
+    for key in json.loads(json_data):
+        print(boldblue + '      ' + key + ": " + cyan + json.loads(json_data)[key])
+    print(boldblue + f"[ {reset + '*' + boldblue} ] {cyan + 'Here You Will See Information About the Short Site'}")
+    for key in json.loads(json_datae):
+        print(boldblue + '      ' + key + ": " + cyan + json.loads(json_datae)[key])
+
+
+
 # colors
 boldgreen = "\033[1;32m"
 cyan = "\033[0;36m"
 boldblue = "\033[1;34m"
 blue = "\033[0;34m"
-blanco="\033[1;37m"
+white="\033[1;37m"
 reset = "\033[0;0m"
 
 
@@ -92,22 +188,23 @@ print(boldblue + '''
       /" \   :) |: | \  \  /\  |\  /|__/ \    ( \_|:  \  /\  |\(:      "| |:  __   \ 
      (_______/  (__|  \__)(__\_|_)(_______)    \_______)(__\_|_)\_______) |__|  \___)
 
-
-               ┌══════════════════════════════════════════════════┐
-               █        THANK YOU FOR INSTALLING SKIPLIER         █
-               █        WE HOPE YOU HAVE A GOOD EXPERIENCE        █
-               █    AND DON'T FORGET TO GIVE US A STAR ON GITHUB! █
-               └══════════════════════════════════════════════════┘
+               
+                            THANK YOU FOR INSTALLING SKIPLIER         
+                            WE HOPE YOU HAVE A GOOD EXPERIENCE        
+                      AND DON'T FORGET TO GIVE US A STAR ON GITHUB! 
 ''')
 url = input(boldblue + f'''
-┌──[{blanco + 'ENTER THE SHORT LINK' + boldblue}]
-└─>>> ''' + cyan)
+┌═══════════════════════════┐
+█ {white}ENTER THE SHORT LINK HERE {boldblue}█
+├═══════════════════════════┘
+┃
+└─═>>> ''' + cyan)
 domain = url.split("//")[-1].split("/")[0].split('?')[0]
+EncodeURL(url)
 
 
-
-if domain == 'favoacew.com' or domain == 'fumacrom.com':
-    response = session.get(url, headers={'user-agent': useragent})
+if domain == 'favoacew.com' or domain == 'fumacrom.com' or domain == 'barsoocm.com':
+    response = session.get(url)
     ysmm = re.findall(r'var ysmm =.*\;?', response.text)
     ysmm = re.sub(r'var ysmm \= \'|\'\;', '', ysmm[0])
     left = ''
@@ -122,18 +219,22 @@ if domain == 'favoacew.com' or domain == 'fumacrom.com':
         if xor < 10:
             encoded_uri[first[0]] = str(xor)    
     uri = b64decode("".join(encoded_uri).encode())[16:-16].decode()
+    output_file(DecodeURL(unquote(uri.split('=')[6])))
     os.system('sudo service tor stop')
-    print(reset + '\n' + unquote(uri.split('=')[6]))
+    os.system('clear')
+    for_loop()
     exit()
 
 
 
 if domain == 'cutt.us' or domain == 'soo.gd':
-    response = session.get(url, headers={'user-agent': useragent})
+    response = session.get(url)
     soup = BeautifulSoup(response.text, "lxml")
     uri = soup.find('a', attrs={'rel':'nofollow'})['href']
+    output_file(DecodeURL(uri))
     os.system('sudo service tor stop')
-    print(reset + '\n' + uri)
+    os.system('clear')
+    for_loop()
     exit()
 
 
@@ -147,19 +248,54 @@ if domain == 'tiny.cc':
         url = url
     elif protocol != 'http' or protocol != 'https':
         url = 'https://' + url
-    response = session.head(url, headers={'user-agent': useragent})
+    response = session.head(url)
     if response.headers['Location']:
         uri = response.headers['Location']
+        output_file(DecodeURL(uri))
         os.system('sudo service tor stop')
-        print(reset + '\n' + uri)
+        os.system('clear')
+        for_loop()
+        exit()
+
+
+
+if domain == 'trimurl.co':
+    response = session.get(url)
+    uri = response.url
+    print(reset + '\n' + uri)
+    output_file(DecodeURL(uri))
+    os.system('sudo service tor stop')
+    os.system('clear')
+    for_loop()
+    exit()
+
+
+
+if domain == 'chilp.it':
+    link = url.split('://')[1]
+    protocol = url.split(':')[-0]
+    if protocol == 'https':
+        protocol2 = protocol.replace('s','')
+        url = protocol2 + '://' + link
+    elif protocol == 'http':
+        url = url
+    response = session.head(url)
+    if response.headers['Location']:
+        uri = response.headers['Location']
+        output_file(DecodeURL(uri))
+        os.system('sudo service tor stop')
+        os.system('clear')
+        for_loop()
         exit()
 
 
 
 else:
-    response = session.head(url, headers={'user-agent': useragent})
+    response = session.head(url)
     if response.headers['Location']:
         long = response.headers['Location']
+        output_file(DecodeURL(long))
         os.system('sudo service tor stop')
-        print(reset + '\n' + long)
+        os.system('clear')
+        for_loop()
         exit()
