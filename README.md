@@ -29,7 +29,7 @@ $ chmod +x *
 $ python3 skiplier.py
 ```
 ## Screenshot
-<img src="https://i.imgur.com/kPdLNyt.png" alt="screenshot" width="650" height="500">
+<img src="https://i.imgur.com/sVg3ukF.png" alt="screenshot" width="650" height="500">
 
 ## License
 The source code for the site is licensed under the MIT license<br/>
