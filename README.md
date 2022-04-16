@@ -1,4 +1,4 @@
-<h1 align="center">Skiplier</h1>
+<h1 align="center">Storm</h1>
 
 It is a script that decodes any short link, even links that have ads and wait without knowing your IP address or even the browser or even the system. The truth information will be hidden that there are sites that reveal your IP address to those who made the short link. So I made it to avoid those scams they use to reveal some information from us too. I used Tor to implement this code. I wish you good luck
 
