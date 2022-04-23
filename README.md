@@ -1,4 +1,4 @@
-<h2 style="" align="center">Storm</h2>
+<h3 style="" align="center">Storm</h3>
 <p align="center">
   <a href="#setup">Setup</a>
   &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
