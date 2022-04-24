@@ -49,7 +49,7 @@ Simply dear user, put the short link and then enter yes or no if you want to sav
 Dear, you may encounter errors or problems in your use of the performance, for example, some of the sites the tool cannot give you the real link (403) and the reason is due to the Tor proxy, which or the site refuses Tor proxy requests, it is good luck that there are sites that accept requests from Tor proxies and this is something good
 
 ## Preview
-<img src="./assets/TAQhcob.png" alt="Interface">
+<img src="./assets/preview.png" alt="Interface">
 
 ## License
 The source code for the site is licensed under the MIT license<br/>
