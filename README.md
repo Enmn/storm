@@ -2,11 +2,11 @@
 <p align="center">
   <a href="#setup">Setup</a>
   &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#requirements">Requirements</a>
+  &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#installation">Installation</a>
   &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#usage">Usage</a>
-  &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#error">Error</a>
 </p>
 <p>It is a script that decodes any short link, even links that have ads and wait without knowing your IP address or even the browser or even the system. The truth information will be hidden that there are sites that reveal your IP address to those who made the short link. So I made it to avoid those scams they use to reveal some information from us too. I used Tor to implement this code. I wish you good luck
 </p>
@@ -28,6 +28,8 @@ Now install Git to be able to install Storm
 ```console
 $ sudo apt-get install git
 ```
+## Requirements
+<p>1. you must have a Linux or even a Linux subfolder<br>2. you must have Python<br>3. You must install the libraries in the file <code>requirements.txt</code></p>
 
 ## Installation
 ```console
@@ -46,7 +48,7 @@ Simply dear user, put the short link and then enter yes or no if you want to sav
 ## Error
 Dear, you may encounter errors or problems in your use of the performance, for example, some of the sites the tool cannot give you the real link (403) and the reason is due to the Tor proxy, which or the site refuses Tor proxy requests, it is good luck that there are sites that accept requests from Tor proxies and this is something good
 
-## Interface
+## Preview
 <img src="./assets/TAQhcob.png" alt="Interface">
 
 ## License
