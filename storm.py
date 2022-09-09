@@ -25,5 +25,5 @@ _\_`.(___)  | |(   ) | |  | |  | |        | |  | |  | |
 
 if __name__ == "__main__":
     logo()
-    from info import run
+    from track import run
     run()
