@@ -36,7 +36,6 @@ def ipinfo(ip):
     data = response.json()
     return data
 
-
 def unshorten():
     global uri
     if FliterWeb == 'unshorten.me':
@@ -44,8 +43,7 @@ def unshorten():
         url = api_url + slink
         response = session.get(url=url, headers=header).json()
         uri = response['resolved_url']
-
-
+        
 def info():
     file = open('blacklist.json', 'r').read()
     lists = json.loads(file)
@@ -95,7 +93,6 @@ def info():
     print(boldblue + "Timezone: " + cyan + timezone)
     print(boldblue + "IP Address: " + cyan + ip + reset)
     input("\n" + boldblue + 'Press any key to continue . . .' + reset)
-
 
 def run():
     unshorten()
